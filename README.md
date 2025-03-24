@@ -22,7 +22,7 @@ Each dataset is available in at least 2 forms, a "raw" version, containing compr
 
 ## PDB
 
-This folder contains MSAs and structures from the protein data bank(PDB). For each unique sequence in the PDB, we generate MSAs following the [OF3 MSA protocol]() available at `pdb/raw/msas/{pdb_chain_id}`. As the same unique sequence may be used across many PDB structures, we provide a mapping between all PDB chains and the representatives that have alignmetns at `pdb/raw/msas/representative_mapping.csv`
+This folder contains MSAs and structures from the protein data bank(PDB). For each unique sequence in the PDB, we generate MSAs following the [OF3 MSA protocol]() available at `pdb/raw/msas/{pdb_chain_id}`. As the same unique sequence may be used across many PDB structures, we provide a mapping between all PDB chains and the representatives that have alignments at `pdb/raw/msas/representative_mapping.csv`
 
 We provide the snapshot of pdb structures in CIF format at `pdb/raw/structures/{pdb_id}/{pdb_id}.cif` 
 
@@ -47,4 +47,18 @@ The PDB-disorderd dataset is an auxiliary trainind dataset for Openfold3. It con
 
 ## Long monomer distilation set
 
-This dataset contains MSAs and predicted structure for 13 million long (sequence length  >= 200 amino acids) from the MGNIFY database.
+This dataset contains MSAs and predicted structure for 13 million long (sequence length  >= 200 amino acids) from the MGNIFY database. There are three levels of data available: 
+
+- Preprocessed structures, alignments and templates saved as .npz files, specifically designated for OF3 training under `long-monomer-distillation-set/preprocessed/{modality}/{mgy_id}/{mgy_id}.npz`
+- Diversity filtered MSAs and predicted structures for each sequence in the dataset. The diversity filtered MSA is under `long-monomer-distillation-set/structures/{mgy_id}/concat_cfdb_uniref100_filtered.a3m` . For most structures, two predicted structures, one using templates and one without using templates are in `long-monomer-distillation-set/structures/{mgy_id}/extra_structures/`. Of these, the structure with the highest predicted confidence is additionally available under `long-monomer-distillation-set/structures/{mgy_id}/best_structure_relaxed.pdb`
+- Raw, unfiltered MSAs for each structure, with the following directory structure: `long-monomer-distillation-set/msas/{mgy_id}/{uniref100_hits|cfdb_hits}.a3m`
+
+
+## Short monomer distillation set
+
+This dataset contains MSAs and predicted structure for 9 million long (sequence length < 200 amino acids) from the MGNIFY database. This directory follows the exact same layout as the long monomers 
+
+
+
+
+
